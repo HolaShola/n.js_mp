@@ -1,19 +1,12 @@
-const EventEmitter = require('events');
+//require('babel-register')({
+//    presets: [ 'es2015' ]
+//});
 
 import { User, Product } from './models/index.js';
-import * as config from './config/config.json';
 
-import DirWatcher from './dirwatcher';
-import Importer from './importer';
+import * as config from './config/config.json';
 
 let user = new User();
 let product = new Product();
 
 console.log(config.name);
-
-let dirWatcherFoo = new EventEmitter();
-let dirwatcher = new DirWatcher(dirWatcherFoo);
-let importer = new Importer(dirWatcherFoo);
-
-dirwatcher.watch('./data', 3000);
-importer.subscriber();
