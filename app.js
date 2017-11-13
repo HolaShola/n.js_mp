@@ -1,45 +1,77 @@
-var express = require('express');
-var path = require('path');
-// var favicon = require('serve-favicon');
-// var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+import express from 'express';
+const _ = require('lodash');
+const bodyParser = require('body-parser');
 
-var index = require('./routes/index');
+import {
+  getProducts,
+  getProduct,
+  getProductReviews,
+  getUsers,
+  setProduct,
+  getAnswerIfSuccess,
+  getAnswerIfError,
+  data
+} from './models/mock.js';
+// import { cookiesParser, queryParser } from './middlewares';
 
-var app = express();
+const router = express.Router();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+router
+  .route('/api/products')
+  .post((request, response) => {
+    if (setProduct(JSON.stringify(request.body))) response.status(201).end();
+    response.status(401).end();
+  })
+  .get((request, response) => {
+    response.json(getProducts());
+  });
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-//app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+router
+  .route('/api/products/:id')
+  .get((request, response) => {
+    response.json(getProduct(request.params.id));
+  });
 
-app.use('/', index);
-//app.use('/users', users);
+router
+  .route('/api/products/:id/reviews')
+  .get((request, response) => {
+    response.json(getProductReviews(request.params.id));
+  });
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+router
+  .route('/api/users')
+  .get((request, response) => {
+    response.json(getUsers(request.params.id));
+  });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+router
+  .route('/authenticate')
+  .post((request, response) => {
+    console.log(data);
+    let user = _.find(data, { username: request.body.username });
+    
+    if (user === undefined || user.email !== request.body.email) {
+		  response.status(404).json(getAnswerIfError());		
+    } else {
+      response.json(getAnswerIfSuccess());
+      // let payload = { "sub": employee.id, "isActive": employee.isActive };
+      // let token = jwt.sign(payload, 'secret', { expiresIn: 10 });
+      // res.send(token);
+    }
+  });
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+export default {
+  listen(port, cb) {
+    const app = express();
+ //   app.use(cookiesParser);
+ //   app.use(queryParser);
 
-module.exports = app;
+ // without bodyParser request.body === undefined
+    app.use(bodyParser.json());
+    app.use(router);
+    app.listen(port);
+    if (typeof cb === 'function') {
+      cb();
+    }
+  }
+}

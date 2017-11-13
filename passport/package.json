@@ -1,0 +1,19 @@
+{
+  "name": "passport-example",
+  "version": "1.0.0",
+  "description": "EPAM Global NodeJS Mentoring. PassportJS auth example",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

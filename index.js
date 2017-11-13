@@ -1,12 +1,14 @@
-//require('babel-register')({
-//    presets: [ 'es2015' ]
-//});
-
+import app from './app';
 import { User, Product } from './models/index.js';
-
 import * as config from './config/config.json';
 
-let user = new User();
-let product = new Product();
+const port = process.env.PORT || 8080;
 
-console.log(config.name);
+app.listen(port, () => console.log(`App listening on port ${port}!`)) 
+
+// let user = new User();
+// let product = new Product();
+
+//console.log(config.name);
+//console.log(port);
+//console.log(app);
