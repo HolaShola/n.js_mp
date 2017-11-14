@@ -1,3 +1,6 @@
 {
-  "name": "NodeMP HW App"
+  "name": "NodeMP HW App",
+  "database": "node_mp",
+  "username": "node_mp_user",
+  "password": "qwerty"
 }

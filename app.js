@@ -17,8 +17,8 @@ import {
 import checkToken from './middlewares/checkToken';
 const router = express.Router();
 
-import { data2 } from './passport/employees.json';
-import { tokens } from './passport/tokens.json';
+import data2 from './employees.json';
+import tokens from './tokens.json';
 
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
@@ -88,14 +88,34 @@ passport.use(new LocalStrategy({
   }
 ));
 
+passport.use(new BearerStrategy(
+  function (token, done) {
+      let result = _.find(tokens, { token: token });
+
+      if (result === undefined) {
+          done(null, false);
+      } else {
+    done(null, result, { scope: 'all' })		
+  }
+     
+  }
+));
+
+// auth with passwopt
 router
   .route('/authenticate')
   .post(passport.authenticate('local', { session: false }), (request, response) => {
     let token = _.find(tokens, { id: request.user.id });
 
-    res.json(token);
+    response.json(token);
   }
 );
+
+router
+  .route('/employees')
+  .get(passport.authenticate('bearer', { session: false }), (request, response) => {
+    res.json(data);
+  });
 
 export default {
   listen(port, cb) {

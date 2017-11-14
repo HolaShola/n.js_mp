@@ -8,7 +8,6 @@ export default function checkToken(req, res, next) {
             if (err) {
                 res.json({ success: false, message: 'Failed to authenticate token.' });
             } else {
-                // some business logic here
                 next();
             }
         });

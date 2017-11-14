@@ -14,9 +14,12 @@
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
-    "passport-example": "file:passport",
+    "mysql2": "^1.5.0",
+    "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pg": "^7.4.0",
+    "sequelize": "^4.22.6"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
