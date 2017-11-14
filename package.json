@@ -12,10 +12,13 @@
   "dependencies": {
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
-    "lodash": "^4.17.4"
+    "jsonwebtoken": "^8.1.0",
+    "lodash": "^4.17.4",
+    "passport-example": "file:passport",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",

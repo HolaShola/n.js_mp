@@ -88,26 +88,6 @@ export const data = [
   }
 ]
 
-const answerIfSuccess = {
-  "code": 200,
-  "message": "OK",
-  "data": {
-    "user": {
-      "email": "my_user@mail",
-      "username": "my_user"
-    }
-  },
-  "token": "555"
-};
-
-const answerIfError = {
-  "code": 404,
-  "message": "Not Found",
-  "data": {
-      
-  }
-};
-
   export const getProducts = () => {
     return productList;
   };
@@ -130,9 +110,23 @@ const answerIfError = {
   };
 
   export const getAnswerIfError = () => {
-    return answerIfError;
+    return {
+      "code": 404,
+      "message": "Not Found",
+      "data": {}
+    };
   }
 
-  export const getAnswerIfSuccess = () => {
-    return answerIfSuccess;
+  export const getAnswerIfSuccess = (token, username, email) => {
+    return {
+      "code": 200,
+      "message": "OK",
+      "data": {
+        "user": {
+          "email": email,
+          "username": username
+        }
+      },
+     "token": token
+    };
   }
