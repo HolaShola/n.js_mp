@@ -12,8 +12,8 @@ const server = http.createServer((request, response) => {
         if (err) return;
         
         collection
-          .find({name: 'Gomel'})
-   //       .aggregate({ $sample: { size: 1 } })
+   //       .find({name: 'Gomel'})
+          .aggregate({ $sample: { size: 1 } })
           .toArray(function(err, docs) {
             console.log(docs[0])
             db.close()
