@@ -1,17 +1,7 @@
 let mongoose = require('mongoose');
 const http = require('http');
 
-let citySchema = mongoose.Schema({
-  name: String,
-  country: String,
-  capital: Boolean,
-  location: {
-    lat: Number,
-    long: Number
-  }  
-})
-
-let City = mongoose.model('City', citySchema);
+const City = requore('../models/cityShema');
 
 let vitebsk = new City({
   name: 'Vitebsk',
@@ -30,10 +20,6 @@ const server = http.createServer((request, response) => {
     
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', function() {
-    // vitebsk.save(function(err, vitebsk) {
-    //   if (err) return console.error(err);
-    //   console.log(vitebsk);
-    // })
     City.find(function (err, cities) {
       if (err) return console.error(err);
       console.log(cities);

@@ -2,5 +2,26 @@
   "name": "NodeMP HW App",
   "database": "node_mp",
   "username": "node_mp_user",
-  "password": "qwerty"
+  "password": "qwerty",
+  "development": {
+    "username": "node_mp_user",
+    "password": "qwerty",
+    "database": "node_mp",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "node_mp_user",
+    "password": "qwerty",
+    "database": "node_mp",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "node_mp_user",
+    "password": "qwerty",
+    "database": "node_mp",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
 }
