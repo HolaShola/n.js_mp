@@ -35,5 +35,15 @@ router
       res.status(200).send(product);
     });
   })
+  .delete((req, res) => {
+    // Product.findByIdAndRemove(req.params.id, (err, product) => {
+    //   if (err) res.status(500).send(err);
+    //   res.status(200).send(product);  
+    // });
+    Product.remove({id: req.params.id}, (err, product) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(product);  
+    });
+  })
 
 module.exports = router;

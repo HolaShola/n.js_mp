@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const products = require('./routes/products');
 const users = require('./routes/users');
+const cities = require('./routes/cities');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -26,5 +27,6 @@ router.get('/', (req, res) => {
 app.use('/api', router);
 app.use('/api', products);
 app.use('/api', users);
+app.use('/api', cities);
 
 app.listen(port, () => console.log(`App listening on port ${port}!`)) 

@@ -21,5 +21,15 @@ router
       res.status(200).send(user);
     });
   })
+  .delete((req, res) => {
+    // Product.findByIdAndRemove(req.params.id, (err, product) => {
+    //   if (err) res.status(500).send(err);
+    //   res.status(200).send(product);  
+    // });
+    User.remove({id: req.params.id}, (err, user) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(user);  
+    });
+  })
   
 module.exports = router;
