@@ -4,32 +4,36 @@ const mongoose = require('mongoose');
 
 const Product = require('../models/productShema');
 const products = require('../data/mock_products');
+const product_for_post = require('../data/mock_product_for_post');
 
 router
-    .route('/products')
-    .get((req, res) => {
-        Product.find((err, products) => {
-            if (err) res.send(err);
-            res.json(products);
-        });
-    })
-    // .post((req, res) => {
-    //     Product.collection.insert(productsCollection, ((err, products) => {
-    //         productsCollection.forEach(product => {
-    //             product.lastModifiedDate = 'create_at ' +  Date.now();
-    //         });
-    //         if (err) res.send(err);
-    //         res.json(products);
-    //     }));
+  .route('/products')
+  .get((req, res) => {
+    Product.find((err, products) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(products);
+    });
+  })
+  .post((req, res) => {
+    Product.collection.insert(product_for_post, ((err, products) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(products);
+    }));
+    // For post query
+    // let product = new Product(req.body);
+    // product.save((err, createdProduct) => {
+    //   if (err) res.status(500).send(err);
+    //   res.status(200).send(createdProduct);  
     // });
+  });
 
 router
-    .route('/products/:id')
-    .get((req, res) => {
-        Product.findById({_id: req.params.id}, (err, user) => {
-            if (err) res.send(err);
-            res.json(user);
-        });
-    })
+  .route('/products/:id')
+  .get((req, res) => {
+    Product.find({id: req.params.id}, (err, product) => {
+      if (err) res.status(500).send(err);
+      res.status(200).send(product);
+    });
+  })
 
 module.exports = router;
