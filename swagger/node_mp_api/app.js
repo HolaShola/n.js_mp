@@ -12,9 +12,6 @@ var config = {
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
 
-  // install middleware
-  swaggerExpress.register(app);
-
   mongoose.connect('mongodb://localhost/node_mp', {
     useMongoClient: true,
     keepAlive: 300000,
@@ -24,6 +21,9 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
         console.error('MongoDB connection error: ' + err);
         process.exit(1);
     }});
+
+  // install middleware
+  swaggerExpress.register(app);
 
   var port = process.env.PORT || 10010;
   app.listen(port);
